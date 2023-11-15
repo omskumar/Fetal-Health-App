@@ -53,7 +53,7 @@ else:
    user_pred_prob = rf_model.predict_proba(user_df_encoded)
    # Storing the maximum prob. in a new column
    user_df['Predicted Class Prob.'] = user_pred_prob.max(axis = 1)
-   st.write("Fetal Heallth Predictions")
+   st.write("Fetal Health Predictions")
    #color coding
    def color_class(fetal_class):
     color = 'Lime' if fetal_class=="Normal" else 'Yellow' if fetal_class=='Suspect' else 'Orange'
