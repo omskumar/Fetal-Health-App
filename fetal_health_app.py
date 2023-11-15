@@ -25,16 +25,7 @@ user_file = st.file_uploader("Upload your data!")
 if user_file is None:
     st.write("Please upload a file!")
     # Showing additional items
-    #im adding this here because not all visitors will have the time to create and upload a csv file
-    st.subheader("Prediction Performance")
-    tab1, tab2, tab3 = st.tabs(["Feature Importance", 'Confusion Matrix', 'Classification Report'])
-    with tab1:
-       st.image('rf_feature_imp.svg')
-    with tab2:
-       st.image('rf_confusion_matrix.svg')
-    with tab3:
-       class_report_df = pd.read_csv('rf_class_report.csv', index_col = 0)
-       st.dataframe(class_report_df)
+
 
 
 else:
@@ -71,13 +62,14 @@ else:
     color = 'Lime' if fetal_class=="Normal" else 'Yellow' if fetal_class=='Suspect' else 'Orange'
     return f'background-color: {color}'
    st.dataframe(user_df.style.applymap(color_class, subset=['Predicted Fetal Health Class']))
-    # Showing additional items
-   st.subheader("Prediction Performance")
-   tab1, tab2, tab3 = st.tabs(["Feature Importance", 'Confusion Matrix', 'Classification Report'])
-   with tab1:
-      st.image('rf_feature_imp.svg')
-   with tab2:
-      st.image('rf_confusion_matrix.svg')
-   with tab3:
-      class_report_df = pd.read_csv('rf_class_report.csv', index_col = 0)
-      st.dataframe(class_report_df)
+   
+# Showing additional items
+st.subheader("Prediction Performance")
+tab1, tab2, tab3 = st.tabs(["Feature Importance", 'Confusion Matrix', 'Classification Report'])
+with tab1:
+   st.image('rf_feature_imp.svg')
+with tab2:
+   st.image('rf_confusion_matrix.svg')
+with tab3:
+   class_report_df = pd.read_csv('rf_class_report.csv', index_col = 0)
+   st.dataframe(class_report_df)
