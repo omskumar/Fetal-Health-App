@@ -26,8 +26,6 @@ if user_file is None:
     st.write("Please upload a file!")
     # Showing additional items
 
-
-
 else:
     # Loading data
    user_df = pd.read_csv(user_file) # User provided data
