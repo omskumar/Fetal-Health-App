@@ -4,10 +4,10 @@ import pandas as pd
 import pickle
 
 #title
-st.title('Fetal Health Classification') 
+st.title('Fetal Health Classification: A Machine Learning App') 
 # Display the image
 st.image('fetal_health_image.gif', width=700)
-# st.write("app explanation") 
+st.subheader("Utilize my advanced Machine Learning application to predict fetal health classifications.") 
 
 # Reading the pickle files that we created before 
 rf_pickle = open('rf_fetal_health.pickle', 'rb') 
@@ -21,7 +21,7 @@ example_df = example_df.drop(columns = ['fetal_health'])
 st.write(example_df.head(3))
 
 #File Upload
-user_file = st.file_uploader("Select Your Local CSV")
+user_file = st.file_uploader("Upload your data!")
 if user_file is None:
     st.write("Please upload a file!")
 
@@ -48,19 +48,19 @@ else:
    # Predictions for user data
    user_pred = rf_model.predict(user_df_encoded)
    # Adding predicted class to user dataframe
-   user_df['Predicted Class'] = user_pred
+   user_df['Predicted Fetal Health Class'] = user_pred
    # Prediction Probabilities
    user_pred_prob = rf_model.predict_proba(user_df_encoded)
    # Storing the maximum prob. in a new column
-   user_df['Predicted Class Prob.'] = user_pred_prob.max(axis = 1)
-   st.write("Fetal Health Predictions")
+   user_df['Predicted Probability (%)'] = user_pred_prob.max(axis = 1)*100
+   st.subheader("Predicting Fetal Health Class")
    #color coding
    def color_class(fetal_class):
     color = 'Lime' if fetal_class=="Normal" else 'Yellow' if fetal_class=='Suspect' else 'Orange'
     return f'background-color: {color}'
-   st.dataframe(user_df.style.applymap(color_class, subset=['Predicted Class']))
+   st.dataframe(user_df.style.applymap(color_class, subset=['Predicted Fetal Health Class']))
     # Showing additional items
-   st.write("Prediction Performance")
+   st.subheader("Prediction Performance")
    tab1, tab2, tab3 = st.tabs(["Feature Importance", 'Confusion Matrix', 'Classification Report'])
    with tab1:
       st.image('rf_feature_imp.svg')
