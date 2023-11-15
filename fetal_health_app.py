@@ -61,7 +61,7 @@ else:
     return f'background-color: {color}'
    st.dataframe(user_df.style.applymap(color_class, subset=['Predicted Fetal Health Class']))
    
-#prediction performance section
+#prediction performance
 st.subheader("Prediction Performance")
 tab1, tab2, tab3 = st.tabs(["Feature Importance", 'Confusion Matrix', 'Classification Report'])
 with tab1:
