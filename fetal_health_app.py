@@ -9,7 +9,7 @@ st.title('Fetal Health Classification: A Machine Learning App')
 st.image('fetal_health_image.gif', width=700)
 st.subheader("Utilize my advanced Machine Learning application to predict fetal health classifications.") 
 
-# Reading the pickle files that we created before 
+# Reading the rf pickle file
 rf_pickle = open('rf_fetal_health.pickle', 'rb') 
 rf_model = pickle.load(rf_pickle) 
 rf_pickle.close() 
@@ -24,13 +24,12 @@ st.write(example_df.head(3))
 user_file = st.file_uploader("Upload your data!")
 if user_file is None:
     st.write("Please upload a file!")
-    # Showing additional items
 
 else:
-    # Loading data
+    #Loading data
    user_df = pd.read_csv(user_file) # User provided data
    original_df = pd.read_csv('fetal_health.csv') # Original data to create ML model
-   # Dropping null values #test this 
+   # Dropping null values 
    user_df = user_df.dropna() 
    original_df = original_df.dropna()    
    # Remove output column from original data
